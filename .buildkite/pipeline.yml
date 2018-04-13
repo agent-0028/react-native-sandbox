@@ -1,7 +1,8 @@
 steps:
   - name: ":cookie: Test and Snapshot"
     command:
-      - "install_local_deps.sh"
+      - "cd sandbox"
+      - "npm install"
       - "detox build --configuration ios.sim.debug"
       - "detox test --configuration ios.sim.debug"
     artifact_paths: "screenshots/*"
