@@ -11,7 +11,7 @@ echo "--- :evergreen_tree: Build job environment"
 
 env
 
-echo "--- install local dependencies"
+echo "--- :cookie: install local dependencies"
 
 cd sandbox && npm install
 
