@@ -3,6 +3,7 @@ steps:
     command:
       - "cd sandbox"
       - "npm install"
+      - "npm rebuild detox"
       - "detox build --configuration ios.sim.debug"
       - "detox test --configuration ios.sim.debug"
     artifact_paths: "screenshots/*"
