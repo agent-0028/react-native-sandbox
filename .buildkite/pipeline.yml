@@ -2,7 +2,7 @@ steps:
   - name: ":cookie: Test and Screenshot"
     command:
       - "cd sandbox"
-      - "install_local_deps.sh"
+      - "./install_local_deps.sh"
       - "yarn build:detox"
       - "yarn e2e"
     artifact_paths: "sandbox/screenshots/*.png"
