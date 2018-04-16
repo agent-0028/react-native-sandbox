@@ -1,9 +1,8 @@
 steps:
-  - name: ":cookie: Test and Snapshot"
+  - name: ":cookie: Test and Screenshot"
     command:
       - "cd sandbox"
-      - "npm install"
-      - "npm rebuild detox"
-      - "detox build --configuration ios.sim.debug"
-      - "detox test --configuration ios.sim.debug"
+      - "install_local_deps.sh"
+      - "yarn build:detox"
+      - "yarn e2e"
     artifact_paths: "sandbox/screenshots/*.png"

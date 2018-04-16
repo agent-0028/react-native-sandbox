@@ -11,8 +11,15 @@ echo "--- :evergreen_tree: Build job environment"
 
 env
 
+echo "--- :node: Node version"
+
+node --version
+
 echo "--- :cookie: install local dependencies"
 
-cd sandbox && npm install
+yarn install --pure-lockfile
+
+# this is needed because there is some problem linking the compiled bits
+npm rebuild detox
 
 exit

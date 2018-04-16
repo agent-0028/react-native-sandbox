@@ -3,10 +3,11 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "start:metro": "react-native start",
     "test": "jest",
-    "e2e": "detox test",
-    "build:detox": "detox build"
+    "e2e": "detox test --configuration ios.sim.debug",
+    "build:detox": "detox build --configuration ios.sim.debug",
+    "run:ios": "react-native run-ios"
   },
   "dependencies": {
     "react": "16.3.1",
@@ -19,7 +20,7 @@
     "detox-cli": "^7.2.0",
     "jest": "22.4.3",
     "mocha": "^5.0.5",
-    "react-test-renderer": "16.3.1"
+    "react-native-cli": "^2.0.1"
   },
   "jest": {
     "preset": "react-native"
