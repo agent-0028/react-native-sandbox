@@ -7,7 +7,8 @@
     "test": "jest",
     "e2e": "detox test --configuration ios.sim.debug",
     "build:detox": "detox build --configuration ios.sim.debug",
-    "run:ios": "react-native run-ios"
+    "run:ios": "react-native run-ios",
+    "run:android": "react-native run-android"
   },
   "dependencies": {
     "react": "16.3.1",

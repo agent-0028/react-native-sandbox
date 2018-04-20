@@ -3,9 +3,21 @@ Sandbox project for trying out React Native things
 
 ### Getting Started
 
+#### iOS
+
 You need to have Xcode installed, including the command line tools.
 
 This is all working with Xcode 9.3 on High Sierra.
+
+#### Android
+
+Carefully follow the instructions from [React Native Getting Started Guide]. Since we are hoping to customize the build to include Detox, you should use the Android section under "Building Projects with Native Code".
+
+This is working with Android Studio 3.1.1 on High Sierra.
+
+#### Detox tests
+
+Currently this is only working for iOS. Please stay tuned...
 
 To get `detox` build and tests with screenshots to run, you need a couple of homebrew installs that are not scripted.
 
@@ -44,9 +56,19 @@ And in your main window run this to start the app in a simulator using the `reac
 yarn run:ios
 ```
 
+For Android, you need to start the appropriate Virtual Device and then run:
+
+```
+yarn run:android
+```
+
 ### e2e Testing (with screenshots!)
+
+This is currently only working with iOS.
 
 ```
 yarn build:detox
 yarn e2e
 ```
+
+[React Native Getting Started Guide]: https://facebook.github.io/react-native/docs/getting-started.html
