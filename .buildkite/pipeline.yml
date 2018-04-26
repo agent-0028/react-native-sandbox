@@ -3,5 +3,6 @@ steps:
     command:
       - "cd sandbox"
       - "./install_local_deps.sh"
-      - "yarn screenshot"
+      - "yarn screenshot -- ios screen-one screen-two screen-three"
+      - "yarn screenshot -- android screen-one screen-two screen-three"
     artifact_paths: "sandbox/screenshots/*.png"
