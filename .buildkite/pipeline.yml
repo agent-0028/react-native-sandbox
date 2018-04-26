@@ -3,6 +3,5 @@ steps:
     command:
       - "cd sandbox"
       - "./install_local_deps.sh"
-      - "yarn build:detox"
-      - "yarn e2e"
+      - "yarn screenshot"
     artifact_paths: "sandbox/screenshots/*.png"

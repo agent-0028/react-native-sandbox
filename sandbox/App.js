@@ -21,11 +21,43 @@ const instructions = Platform.select({
 
 type Props = {};
 export default class App extends Component<Props> {
+  constructor() {
+    super()
+
+    this.state = {
+      message: '',
+      connected: false
+    }
+  }
+
+  componentDidMount() {
+    this.ws = require('./web_socket').default
+    this.ws.onopen = () => {
+      this.setState({connected: true})
+      this.ws.send('app connected');
+    }
+
+    this.ws.onmessage = (e) => {
+      // console.warn(e.data)
+      this.setState({message: e.data})
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.state.connected && this.state.message) {
+     this.ws.send('SCREENSHOT')
+    }
+  }
+
   render() {
+    const { message } = this.state
     return (
       <View style={styles.container}>
         <Text testID={'whatever'} style={styles.welcome}>
           Welcome to React Native, Ducky!
+        </Text>
+        <Text>
+          This is the message: {message}
         </Text>
         <Text style={styles.instructions}>
           To get started, edit App.js
