@@ -13,6 +13,7 @@ const screens = [
 execSync('yarn run:ios')
 
 wss.on('connection', function connection(ws) {
+
   // send the first screen and remove from array
   const nextScreen = screens.shift()
   if (nextScreen) {
@@ -20,9 +21,11 @@ wss.on('connection', function connection(ws) {
   }
 
   ws.on('message', function incoming(message) {
-    if ( message === 'SCREENSHOT') {
-      setTimeout(() => {
+    setTimeout(() => {
+      if (message === 'SCREENSHOT') {
         takeScreenshot()
+        ws.send('CONTINUE')
+      } else if (message === 'NEXT_SCREEN') {
         const nextScreen = screens.shift()
         if (nextScreen) {
           ws.send(nextScreen)
@@ -30,7 +33,7 @@ wss.on('connection', function connection(ws) {
           execSync('xcrun simctl shutdown booted')
           process.exit()
         }
-      }, 500)
-    }
+      }
+    }, 500)
   });
 });

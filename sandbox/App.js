@@ -25,6 +25,7 @@ export default class App extends Component<Props> {
     super()
 
     this.state = {
+      propsFixture: {},
       message: '',
       connected: false
     }
@@ -33,17 +34,49 @@ export default class App extends Component<Props> {
   componentDidMount() {
     this.ws = require('./web_socket').default
     this.ws.onopen = () => {
-      this.setState({connected: true})
+      this.setState({
+        connected: true
+      })
       this.ws.send('app connected');
     }
 
     this.ws.onmessage = (e) => {
-      // console.warn(e.data)
-      this.setState({message: e.data})
+      if ( e.data === 'CONTINUE') {
+        const { propsFixture } = this.state
+        const keys = Object.keys(propsFixture)
+
+        if ( keys.length ) {
+          const props = propsFixture[keys[0]]
+          delete propsFixture[keys[0]]
+          // and cause the next render
+          this.setState({
+            message: props.message,
+            propsFixture
+          })
+        } else {
+          // done with this screen, let the server know
+          this.ws.send('NEXT_SCREEN')
+        }
+      } else {
+        const screen = e.data
+        const propsFixtures = require('./fixtures').default
+        const propsFixture = propsFixtures[screen]
+        const keys = Object.keys(propsFixture)
+        // grab the first one and remove it from the object
+        const props = propsFixture[keys[0]]
+        delete propsFixture[keys[0]]
+
+        // and cause the first render
+        this.setState({
+          message: props.message,
+          propsFixture
+        })
+      }
     }
   }
 
   componentDidUpdate() {
+    // always screenshot after update
     if (this.state.connected && this.state.message) {
      this.ws.send('SCREENSHOT')
     }
