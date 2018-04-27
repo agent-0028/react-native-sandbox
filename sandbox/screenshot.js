@@ -42,6 +42,6 @@ wss.on('connection', function connection(ws) {
           process.exit()
         }
       }
-    }, 500)
+    }, 1)
   })
 })
